@@ -1,4 +1,5 @@
-{ arr[int($0/10)]++ }
+{ var=int($0/10)
+	++arr[var] }
 END {
         count = 0
 
