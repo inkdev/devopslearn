@@ -1,4 +1,4 @@
-{ var=int($0/10)
+{ var=int($_/10)
 	++arr[var] }
 END {
         count = 0
