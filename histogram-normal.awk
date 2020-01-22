@@ -14,10 +14,12 @@ END {
                         printf ("%d : \t%10.1f ",i*10,arr[i]/199*100)
 
         }
-                for (j = 0; j < arr[i]; ++j)
-                        printf "*"
-                printf "\n"
-                #count += 10
-
-        }
+        	j=0
+		while (j<arr[i])
+		{
+			printf "*"
+			++j
+			}
+		printf "\n"
+	}
 }

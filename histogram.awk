@@ -14,10 +14,13 @@ END {
                         printf "%d : \t%6d ",i*10,arr[i]
 
         }
-                for (j = 0; j < arr[i]; ++j)
-                        printf "*"
-                printf "\n"
-                #count += 10
+                j=0
+		while (j<arr[i])
+		{
+		printf "*"
+		++j
+			}
+			printf "\n"
 
         }
 }
