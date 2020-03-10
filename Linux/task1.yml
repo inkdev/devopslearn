@@ -1,0 +1,6 @@
+---
+
+script: task1.yml
+subroutine: func_create
+begin_patr: "{{"
+end_patr: "}}"

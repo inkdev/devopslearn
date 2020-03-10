@@ -1,0 +1,4 @@
+---
+
+script: "task2.sh"
+config: "mover.conf"
