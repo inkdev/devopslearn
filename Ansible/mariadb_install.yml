@@ -1,0 +1,26 @@
+---
+- name: Install mariadb-server if file present
+  hosts: all
+  become: true
+
+  tasks:
+
+  - name: Check file
+    stat:
+      path: /tmp/database
+    register: db
+
+  - name: Install mariadb
+    yum:
+      name: mariadb-server
+      state: latest
+    when: db.stat.isreg
+    register: db_status
+
+  - name: Start Mariadb
+    service:
+      name: mariadb
+      state: started
+      enabled: yes
+    when: db_status.changed
+

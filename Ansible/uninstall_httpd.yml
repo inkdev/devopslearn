@@ -1,0 +1,23 @@
+---
+- name: Uninstall Apache
+  hosts: all
+  become: true
+
+  tasks:
+  - name: Stop apache
+    service:
+      name: httpd
+      state: stopped
+  - name: Remove file
+    file:
+      path: /var/www/html/index.html
+      state: absent
+  - name: Remove apache
+    yum:
+      name: httpd
+      state: absent
+  - name: Close unused ports
+    firewalld:
+      service: http
+      permanent: yes
+      state: disabled
