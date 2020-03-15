@@ -7,18 +7,18 @@
 CONFDIR=${PWD}
 source "$CONFDIR"/mover.conf
 
-check_log() {
+#check_log() {
 
-LOGDIR=$(dirname "${LOGFILENAME}")
+#LOGDIR=$(dirname "${LOGFILENAME}")
 touch $LOGFILENAME
-}
-if [[ -d $SOURCEDIR ]] && [[ -d $TARGETDIR  ]] 
-	then
-	check_log
-else
-	echo "Source or target directory does not exist"
-	exit 1
-fi
+#}
+#if [[ -d $SOURCEDIR ]] && [[ -d $TARGETDIR  ]] 
+#	then
+#	check_log
+#else
+#	echo "Source or target directory does not exist"
+#	exit 1
+#fi
 
 move_func() {
 	for file in "$SOURCEDIR"/*; do
