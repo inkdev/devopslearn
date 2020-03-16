@@ -1,0 +1,59 @@
+---
+- name: Install vsftpd
+  hosts: all
+  become: true
+
+  tasks:
+  - name: Install ftpd
+    yum:
+      name: vsftpd
+      state: latest
+  - name: Install firewalld
+    yum:
+      name: firewalld
+      state: present
+
+  - name: Start ftp Service
+    service:
+      name: vsftpd
+      state: started
+      enabled: yes
+  - name: Start firewalld
+    service:
+      name: firewalld
+      state: started
+      enabled: yes
+
+  - name: Firewall rule for ftp
+    firewalld:
+      port: 21/tcp
+      permanent: yes
+      state: enabled
+
+  - name: Template config
+    template:
+      src: vsftpd.conf.j2
+      dest: /etc/vsftpd/vsftpd.conf
+      owner: root
+      group: root
+      mode: '0644'
+      backup: yes
+    notify: Restart vsftpd
+  - name: Create folder for anonymous
+    file:
+      path: /var/ftp/pub
+      state: directory
+      mode: '0755'
+      setype: public_content_rw_t
+
+  - name: Ftpd anon write permission
+    shell:
+      cmd: setsebool -P ftpd_anon_write on
+    notify: Restart vsftpd
+
+  handlers:
+  - name: Restart vsftpd
+    service:
+      name: vsftpd
+      state: restarted
+
