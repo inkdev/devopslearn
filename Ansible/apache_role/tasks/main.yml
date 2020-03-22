@@ -1,0 +1,36 @@
+---
+- name: Apache install
+  yum:
+    name: httpd
+    state: latest
+
+- name: Start Apache
+  service:
+    name: httpd
+    state: started
+    enabled: yes
+
+- name: Create vhost
+  template:
+    src: templates/vhost.conf.j2
+    dest: "{{ apache_conf_path }}/{{ apache_vhosts_file}}"
+    owner: root
+    group: root
+    mode: 0644
+    force: yes
+  notify: Apache restart
+
+
+- name: Copy file
+  copy:
+    src: files/index.html
+    dest: /var/www/html/index.html
+    mode: 0605
+  notify: Apache restart
+
+- name: Create firewall rule for http
+  firewalld:
+    service: http
+    permanent: yes
+    state: enabled
+

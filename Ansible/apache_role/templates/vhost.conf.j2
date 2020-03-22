@@ -1,0 +1,6 @@
+<VirtualHost *:{{ listen_port }}>
+    DocumentRoot "/var/www/html"
+    ServerAlias www.{{ ansible_hostname }}
+    ServerName {{ ansible_hostname }}
+</VirtualHost>
+
