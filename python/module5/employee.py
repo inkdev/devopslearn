@@ -49,10 +49,9 @@ class Manager(Employee):
     def remove_subordinate(self, subordinate):
         if subordinate in self.subordinates:
             return self.subordinates.remove(subordinate)
-        else:
-            try:
-                for emp in self.subordinates:
-                    if emp.email == subordinate:
-                        self.subordinates.remove(emp)
-            except ValueError as e:
-                pass
+        try:
+            for emp in self.subordinates:
+                if emp.email == subordinate:
+                    self.subordinates.remove(emp)
+        except ValueError as e:
+            pass
